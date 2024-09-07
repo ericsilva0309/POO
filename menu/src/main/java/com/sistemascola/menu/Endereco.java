@@ -93,7 +93,7 @@ public class Endereco {
         this.cep = cep;
     }
 
-    void imprimeEndereco(){
+    public void imprimeEndereco(){
         System.out.println(this.logradouro);
         System.out.println(this.numero);
         System.out.println(this.complemento);

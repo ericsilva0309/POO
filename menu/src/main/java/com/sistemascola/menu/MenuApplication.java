@@ -49,6 +49,17 @@ public class MenuApplication {
         // ericing.exibirNotas();
         // ericpot.exibirNotas();
         // ericcie.exibirNotas();
+
+        Endereco Marcosend1 = new Endereco(12, "Rua silva jardim", "234", "Quadra 2", "Centro", "Petrópolis", "Rio de Janeiro", "12412344" );
+        Professor Marcos = new Professor(1, "1241255", "Marcos", "1241245", "rafa@gmail.com", Marcosend1, "1455");
+
+        // Adicionando disciplinas ao professor
+        Marcos.adicionarDisciplina(matematica);
+        Marcos.adicionarDisciplina(ingles);
+
+        // Exibindo as disciplinas do professor
+        Marcos.exibirDadosProfessor();
+        //Marcos.exibirDisciplinas();
     }
 }
 
