@@ -27,6 +27,7 @@ public class Alunodisciplina  {
             this.nota2 = nota2;
             this.nota3 = nota3;
             this.nota4 = nota4;
+            calcularMedia();
         }
 
 
@@ -71,6 +72,10 @@ public class Alunodisciplina  {
             return disciplina;
         }
 
+        private void calcularMedia() {
+            this.media = (nota1 + nota2 + nota3 + nota4) / 4;
+        }
+
 
         public void exibirNotas() {
             System.out.println("Disciplina: " + disciplina.getNome());
@@ -78,7 +83,6 @@ public class Alunodisciplina  {
             System.out.printf("2º BI: %.1f%n",nota2);
             System.out.printf("3º BI: %.1f%n",nota3);
             System.out.printf("4º BI: %.1f%n%n",nota4);
-            this.media = (nota1+nota2+nota3+nota4)/4;
             System.out.printf("A média em %s é: %.1f%n%n",disciplina.getNome(),media);
         }
     }
