@@ -2,12 +2,35 @@ package com.sistemascola.menu;
 
 public class Aluno extends Pessoa {
 
+   
+    // Adicione o método toString para a classe Aluno
+    @Override
+    public String toString() {
+        return getNome();
+    }
+
+
+
     private Turma turma;
 
     public Aluno(){
 
     }
 
+    
+    public Aluno(int id, String cpf, String nome, String telefone, String email, Endereco endereco, String matricula, Turma turma) {
+        super(id, cpf, nome, telefone, email, endereco, matricula);
+        this.turma = turma;
+    }
+    public Turma getTurma() {
+        return turma;
+    }
+    
+    public void setTurma(Turma turma) {
+        this.turma = turma;
+    }
+
+    
     public void exibirDadosAluno() {
         System.out.println("\nID do aluno: " + this.getEndereco().getId());
         System.out.println("Turma : " + this.getTurma().getNumero());
@@ -22,17 +45,5 @@ public class Aluno extends Pessoa {
         System.out.println("Bairro: " + this.getEndereco().getBairro());
         System.out.println("Cidade: " + this.getEndereco().getCidade());
         System.out.println("Estado: " + this.getEndereco().getEstado() + "\n");
-    }
-
-    public Aluno(int id, String cpf, String nome, String telefone, String email, Endereco endereco, String matricula, Turma turma) {
-        super(id, cpf, nome, telefone, email, endereco, matricula);
-        this.turma = turma;
-    }
-    public Turma getTurma() {
-        return turma;
-    }
-
-    public void setTurma(Turma turma) {
-        this.turma = turma;
     }
 }

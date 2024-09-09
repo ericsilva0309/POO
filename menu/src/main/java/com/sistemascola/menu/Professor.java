@@ -5,6 +5,13 @@ import java.util.List;
 
 public class Professor extends Pessoa implements Login {
 
+    // Adicione o método toString para a classe Professor
+    @Override
+    public String toString() {
+        return getNome();
+    }
+
+
     private String usuario;
     private String senha;
     private List<Disciplina> disciplinas; // Professor pode ter mais de uma disciplina

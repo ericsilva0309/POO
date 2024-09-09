@@ -15,8 +15,20 @@ public class MenuApplication {
 		Turma turma1 = new Turma(12, "3");
 		Endereco rafaEnd1 = new Endereco(12, "Rua silva jardim", "234", "Quadra 2", "Centro", "Petrópolis", "Rio de Janeiro", "12412344" );
         Aluno rafael = new Aluno(1, "1241255", "Rafael", "1241245", "rafa@gmail.com", rafaEnd1, "1455", turma1);
+		Endereco ericEnd1 = new Endereco(12, "Rua silva jardim", "234", "Quadra 2", "Centro", "Petrópolis", "Rio de Janeiro", "12412344" );
+        Aluno eric = new Aluno(2, "12412355", "Eric", "1241245", "eric@gmail.com", ericEnd1, "1455", turma1);
         //Aluno eric = new Aluno("Eric", 12346);
+        
+        turma1.adicionarAluno(rafael);
+        turma1.adicionarAluno(eric);
 
+        Endereco Marcosend1 = new Endereco(12, "Rua silva jardim", "234", "Quadra 2", "Centro", "Petrópolis", "Rio de Janeiro", "12412344" );
+        Professor Marcos = new Professor(1, "1241255", "Marcos", "1241245", "Marcos@gmail.com", Marcosend1, "1455");
+        Endereco Dennyend1 = new Endereco(13, "Rua silva jardim", "234", "Quadra 2", "Centro", "Petrópolis", "Rio de Janeiro", "12412344" );
+        Professor Denny = new Professor(13, "1241255", "Denny", "1241245", "denn@gmail.com", Dennyend1, "1455");
+
+        turma1.adicionarProfessor(Marcos);
+        turma1.adicionarProfessor(Denny);
 
         Disciplina matematica = new Disciplina("Matemática", "MAT101");
         Disciplina ingles = new Disciplina("Inglês", "ING101");
@@ -50,8 +62,6 @@ public class MenuApplication {
         // ericpot.exibirNotas();
         // ericcie.exibirNotas();
 
-        Endereco Marcosend1 = new Endereco(12, "Rua silva jardim", "234", "Quadra 2", "Centro", "Petrópolis", "Rio de Janeiro", "12412344" );
-        Professor Marcos = new Professor(1, "1241255", "Marcos", "1241245", "rafa@gmail.com", Marcosend1, "1455");
 
         // Adicionando disciplinas ao professor
         Marcos.adicionarDisciplina(matematica);
@@ -60,6 +70,7 @@ public class MenuApplication {
         // Exibindo as disciplinas do professor
         Marcos.exibirDadosProfessor();
         //Marcos.exibirDisciplinas();
+        turma1.exibirDadosTurma();
     }
 }
 

@@ -1,11 +1,14 @@
 package com.sistemascola.menu;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Turma {
 
     private int id;
     private String numero;
-    private Aluno aluno;
-    private Professor professor;
+    private List<Aluno> alunos;
+    private List<Professor> professores;
 
     public Turma(){
 
@@ -14,6 +17,16 @@ public class Turma {
     public Turma(int id, String numero) {
         this.id = id;
         this.numero = numero;
+        this.alunos = new ArrayList<>(); // Inicializa a lista de alunos
+        this.professores = new ArrayList<>();
+    }
+
+    public void adicionarAluno(Aluno aluno) {
+        this.alunos.add(aluno); // Adiciona um aluno à lista
+    }
+    
+    public void adicionarProfessor(Professor professor) {
+        this.professores.add(professor); // Adiciona um aluno à lista
     }
 
     public int getId() {
@@ -32,20 +45,48 @@ public class Turma {
         this.numero = numero;
     }
 
-    public Aluno getAluno() {
-        return aluno;
+    public List<Aluno> getAlunos() {
+        return alunos;
     }
 
-    public void setAluno(Aluno aluno) {
-        this.aluno = aluno;
+    public void setAlunos(List<Aluno> alunos) {
+        this.alunos = alunos;
     }
 
-    public Professor getProfessor() {
-        return professor;
+
+
+
+    public List<Professor> getProfessores() {
+        return professores;
     }
 
-    public void setProfessor(Professor professor) {
-        this.professor = professor;
+    public void setProfessores(List<Professor> professores) {
+        this.professores = professores;
     }
+    
+
+    public void exibirDadosTurma() {
+        System.out.println("\nID da turma: " + this.getId());
+        System.out.println("Número da turma: " + this.getNumero());
+    
+        if (alunos.isEmpty()) {
+            System.out.println("Nenhum aluno registrado.");
+        } else {
+            System.out.println("\nAlunos:");
+            for (Aluno aluno : alunos) {
+                System.out.println("- " + aluno); // Isso vai chamar o método toString() de Aluno
+            }
+        }
+        if (professores.isEmpty()) {
+            System.out.println("Nenhum professor registrado.");
+        } else {
+            System.out.println("\nProfessores:");
+            for (Professor professor : professores) {
+                System.out.println("- " + professor); // Isso vai chamar o método toString() de professor
+            }
+        }
+
+    }
+    
 
 }
