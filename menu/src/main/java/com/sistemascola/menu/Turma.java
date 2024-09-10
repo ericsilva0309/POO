@@ -24,7 +24,7 @@ public class Turma {
     public void adicionarAluno(Aluno aluno) {
         this.alunos.add(aluno); // Adiciona um aluno à lista
     }
-    
+
     public void adicionarProfessor(Professor professor) {
         this.professores.add(professor); // Adiciona um aluno à lista
     }
@@ -82,11 +82,10 @@ public class Turma {
         } else {
             System.out.println("\nProfessores:");
             for (Professor professor : professores) {
-                System.out.println("- " + professor); // Isso vai chamar o método toString() de professor
+                System.out.println("- " + professor.getNome()); // Isso vai chamar o método toString() de professor
             }
         }
 
     }
-    
 
 }

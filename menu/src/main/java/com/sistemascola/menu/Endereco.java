@@ -7,7 +7,7 @@ public class Endereco {
     private String complemento;
     private String bairro;
     private String cidade;
-    private String estado;
+    private UnidadeFederal unidade;
     private String cep;
 
     public Endereco(){
@@ -15,24 +15,31 @@ public class Endereco {
     }
 
     public Endereco(int id, String logradouro, String numero, String complemento, String bairro, String cidade,
-            String estado, String cep) {
+    UnidadeFederal unidade, String cep) {
         this.id = id;
         this.logradouro = logradouro;
         this.numero = numero;
         this.complemento = complemento;
         this.bairro = bairro;
         this.cidade = cidade;
-        this.estado = estado;
+        this.unidade = unidade;
         this.cep = cep;
     }
+    
+    
+    
+    public UnidadeFederal getUnidade() {
+        return unidade;
+    }
 
-
-
+    public void setUnidade(UnidadeFederal unidade) {
+        this.unidade = unidade;
+    }
     // Getters e Setters
     public int getId() {
         return id;
     }
-
+    
     public void setId(int id) {
         this.id = id;
     }
@@ -77,14 +84,6 @@ public class Endereco {
         this.cidade = cidade;
     }
 
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
     public String getCep() {
         return cep;
     }
@@ -99,7 +98,7 @@ public class Endereco {
         System.out.println(this.complemento);
         System.out.println(this.bairro);
         System.out.println(this.cidade);
-        System.out.println(this.estado);
+        System.out.println(this.unidade);
         System.out.println(this.cep);
     }
 }
