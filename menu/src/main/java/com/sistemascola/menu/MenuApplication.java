@@ -11,10 +11,10 @@ public class MenuApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(MenuApplication.class, args);
 
-
+        Aluno.menuAluno();
 		//Aluno rafael = new Aluno();
 		//rafaEnd1.setCidade("Petropolis");
-		Turma turma1 = new Turma(12, "1");
+		/*Turma turma1 = new Turma(12, "1");
 
         Endereco rafaEnd1 = new Endereco(12, "Rua silva jardim", "234", "Quadra 2", "Centro", "Petrópolis",UnidadeFederal.RJ, "12412344" );
         Aluno rafael = new Aluno(1, "1241255", "Rafael", "1241245", "rafa@gmail.com", rafaEnd1, "1455", turma1, ModalidadeEnsino.HIBRIDO);
@@ -28,17 +28,18 @@ public class MenuApplication {
 
         Endereco marcosend1 = new Endereco(12, "Rua silva jardim", "234", "Quadra 2", "Centro", "Petrópolis", UnidadeFederal.AL, "12412344" );
         Professor marcos = new Professor(1, "1241255", "Marcos", "1241245", "Marcos@gmail.com", marcosend1, "1455");
-        Endereco Dennyend1 = new Endereco(13, "Rua silva jardim", "234", "Quadra 2", "Centro", "Petrópolis", UnidadeFederal.GO, "12412344" );
-        Professor Denny = new Professor(13, "1241255", "Denny", "1241245", "denn@gmail.com", Dennyend1, "1455");
+        Endereco dennyend1 = new Endereco(13, "Rua silva jardim", "234", "Quadra 2", "Centro", "Petrópolis", UnidadeFederal.GO, "12412344" );
+        Professor denny = new Professor(13, "1241255", "Denny", "1241245", "denn@gmail.com", dennyend1, "1455");
 
+        Professor.professores.add(marcos);
+        Professor.professores.add(denny);
         turma1.adicionarProfessor(marcos);
-        turma1.adicionarProfessor(Denny);
+        turma1.adicionarProfessor(denny);
 
         Disciplina matematica = new Disciplina("Matemática", "MAT101");
         Disciplina ingles = new Disciplina("Inglês", "ING101");
         Disciplina portugues = new Disciplina("Português", "POT101");
         Disciplina ciencias = new Disciplina("Ciências", "CIE101");
-
 
 
         Alunodisciplina rafaelmat = new Alunodisciplina(rafael, matematica, 8.5, 4, 5, 6);
@@ -66,7 +67,6 @@ public class MenuApplication {
         // ericpot.exibirNotas();
         // ericcie.exibirNotas();
 
-
         // Adicionando disciplinas ao professor
         marcos.adicionarDisciplina(matematica);
         marcos.adicionarDisciplina(ingles);
@@ -74,7 +74,7 @@ public class MenuApplication {
         // Exibindo as disciplinas do professor
         marcos.exibirDadosProfessor();
         //Marcos.exibirDisciplinas();
-        turma1.exibirDadosTurma();
+        turma1.exibirDadosTurma();*/
     }
 }
 

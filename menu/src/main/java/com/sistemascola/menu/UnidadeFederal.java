@@ -1,5 +1,8 @@
 package com.sistemascola.menu;
 
+import lombok.Getter;
+
+@Getter
 public enum UnidadeFederal {
     // Sudeste
     RJ("Rio de Janeiro"),
@@ -42,9 +45,5 @@ public enum UnidadeFederal {
 
     UnidadeFederal(String nomePorExtenso) {
         this.nomePorExtenso = nomePorExtenso;
-    }
-
-    public String getNomePorExtenso() {
-        return nomePorExtenso;
     }
 }

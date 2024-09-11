@@ -1,5 +1,10 @@
 package com.sistemascola.menu;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class Endereco {
     private int id;
     private String logradouro;
@@ -9,6 +14,7 @@ public class Endereco {
     private String cidade;
     private UnidadeFederal unidade;
     private String cep;
+    private String referencia;
 
     public Endereco(){
 
@@ -23,72 +29,6 @@ public class Endereco {
         this.bairro = bairro;
         this.cidade = cidade;
         this.unidade = unidade;
-        this.cep = cep;
-    }
-    
-    
-    
-    public UnidadeFederal getUnidade() {
-        return unidade;
-    }
-
-    public void setUnidade(UnidadeFederal unidade) {
-        this.unidade = unidade;
-    }
-    // Getters e Setters
-    public int getId() {
-        return id;
-    }
-    
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getLogradouro() {
-        return logradouro;
-    }
-
-    public void setLogradouro(String logradouro) {
-        this.logradouro = logradouro;
-    }
-
-    public String getNumero() {
-        return numero;
-    }
-
-    public void setNumero(String numero) {
-        this.numero = numero;
-    }
-
-    public String getComplemento() {
-        return complemento;
-    }
-
-    public void setComplemento(String complemento) {
-        this.complemento = complemento;
-    }
-
-    public String getBairro() {
-        return bairro;
-    }
-
-    public void setBairro(String bairro) {
-        this.bairro = bairro;
-    }
-
-    public String getCidade() {
-        return cidade;
-    }
-
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
-    }
-
-    public String getCep() {
-        return cep;
-    }
-
-    public void setCep(String cep) {
         this.cep = cep;
     }
 

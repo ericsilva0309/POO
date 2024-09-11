@@ -3,15 +3,20 @@ package com.sistemascola.menu;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class Professor extends Pessoa implements Login {
 
     // Adicione o método toString para a classe Professor
 
-
-
     private String usuario;
     private String senha;
     private List<Disciplina> disciplinas; // Professor pode ter mais de uma disciplina
+
+    public static List <Professor> professores = new ArrayList<Professor>();
 
     // Construtor com parâmetros
     public Professor(int id, String cpf, String nome, String telefone, String email, Endereco endereco, String matricula) {
@@ -22,10 +27,6 @@ public class Professor extends Pessoa implements Login {
     // Construtor padrão
     public Professor() {
         this.disciplinas = new ArrayList<>(); // Inicializando a lista
-    }
-
-    public List<Disciplina> getDisciplinas() {
-        return disciplinas;
     }
 
     public void adicionarDisciplina(Disciplina disciplina) {
@@ -43,22 +44,16 @@ public class Professor extends Pessoa implements Login {
         }
     }
 
-    public String getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
+    public void exibirListaDeProfessores(){
+            if (professores.isEmpty()) {
+                System.out.println("Nenhum professor registrado.");
+            } else {
+                System.out.println("\nProfessores:");
+                for (Professor professor : professores) {
+                    System.out.println("- " + professor.getNome()); // Isso vai chamar o método toString() de professor
+                }
+            }
+        }
     @Override
     public boolean acessoPermitido(String login, String senha) {
         if (login.equals(getUsuario()) && senha.equals(getSenha())) {
