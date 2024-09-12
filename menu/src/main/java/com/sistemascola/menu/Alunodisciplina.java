@@ -28,7 +28,7 @@ public class Alunodisciplina  {
         }
 
 
-        private void calcularMedia() {
+        public void calcularMedia() {
             this.media = (nota1 + nota2 + nota3 + nota4) / 4;
         }
 
