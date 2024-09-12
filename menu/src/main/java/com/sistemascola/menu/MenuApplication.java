@@ -1,17 +1,27 @@
 package com.sistemascola.menu;
 
 import java.time.LocalDateTime;
+import java.util.Scanner;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import com.sistemascola.menu.Exceptions.DigitoInvalidoException;
 
 @SpringBootApplication
 public class MenuApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(MenuApplication.class, args);
+        
+        Aluno pedro = new Aluno();
+        pedro.setNome("Pedro");
 
-	public static void main(String[] args) {
-		SpringApplication.run(MenuApplication.class, args);
+        MenuEscola.diretor();
 
-        Aluno.menuAluno();
+
+        
+    }
+}
+
 		//Aluno rafael = new Aluno();
 		//rafaEnd1.setCidade("Petropolis");
 		/*Turma turma1 = new Turma(12, "1");
@@ -62,7 +72,7 @@ public class MenuApplication {
 		//rafael.getNome();
 
         // eric.exibirDados();
-        // ericmat.exibirNotas();
+         ericmat.exibirNotas();
         // ericing.exibirNotas();
         // ericpot.exibirNotas();
         // ericcie.exibirNotas();
@@ -75,7 +85,7 @@ public class MenuApplication {
         marcos.exibirDadosProfessor();
         //Marcos.exibirDisciplinas();
         turma1.exibirDadosTurma();*/
-    }
-}
+
+
 
 

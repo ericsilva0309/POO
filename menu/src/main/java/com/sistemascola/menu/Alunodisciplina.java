@@ -32,6 +32,7 @@ public class Alunodisciplina  {
             this.media = (nota1 + nota2 + nota3 + nota4) / 4;
         }
 
+        
 
         public void exibirNotas() {
             System.out.println("Disciplina: " + disciplina.getNome());
