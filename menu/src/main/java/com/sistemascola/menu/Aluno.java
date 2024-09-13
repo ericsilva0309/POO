@@ -1,74 +1,71 @@
 package com.sistemascola.menu;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
+
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 public class Aluno extends Pessoa {
-    private static final Scanner sc = new Scanner(System.in); // Scanner global para entrada de dados
+    private static final Scanner sc = new Scanner(System.in); // Scanner global
+    private Turma turma;
+    private LocalDateTime matriculadoEm;
+    private ModalidadeEnsino modalidade;
+    public static List<Aluno> listaDeAlunos = new ArrayList<>();
+    private List<Alunodisciplina> listaDisciplinas = new ArrayList<>();
 
-    private Turma turma; // Representa a turma à qual o aluno pertence
-    private LocalDateTime matriculadoEm; // Armazena a data e hora da matrícula do aluno
-    private ModalidadeEnsino modalidade; // Define o tipo de modalidade de ensino do aluno
-    public static List<Aluno> listaDeAlunos = new ArrayList<>(); // Lista estática para armazenar todos os alunos
-    private List<Alunodisciplina> listaDisciplinas = new ArrayList<>(); // Lista de disciplinas do aluno
-
-    // Construtor padrão, não inicializa atributos
+    // Construtor padrão
     public Aluno() {
+        // Inicialize qualquer coisa se necessário
     }
 
-    // Construtor com parâmetros para criar um aluno com todas as informações necessárias
+    // Construtor com parâmetros
     public Aluno(int id, String cpf, String nome, String telefone, String email,
                  Endereco endereco, String matricula, Turma turma, ModalidadeEnsino modalidade) {
-        super(id, cpf, nome, telefone, email, endereco, matricula); // Inicializa atributos da classe pai (Pessoa)
-        this.turma = turma; // Define a turma do aluno
-        this.modalidade = modalidade; // Define a modalidade de ensino do aluno
-        this.matriculadoEm = LocalDateTime.now(); // Define a data e hora atual como data de matrícula
+        super(id, cpf, nome, telefone, email, endereco, matricula);
+        this.turma = turma;
+        this.modalidade = modalidade;
+        this.matriculadoEm = LocalDateTime.now();
     }
 
-    // Adiciona uma disciplina à lista de disciplinas do aluno
     public void adicionarDisciplina(Alunodisciplina disciplina) {
         listaDisciplinas.add(disciplina);
     }
 
-    // Retorna a lista de disciplinas do aluno
     public List<Alunodisciplina> getListaDisciplinas() {
         return listaDisciplinas;
     }
 
-    // Exibe o menu para o aluno, permitindo consultar notas
     public static void menuAluno() {
         int opcao = -1;
+        Scanner sc = new Scanner(System.in); // Mover a instância do Scanner para fora do loop
 
         do {
             try {
                 System.out.println("\n--- MENU ALUNO ---");
                 System.out.println("Selecione o aluno para consultar notas:");
 
-                // Exibe todos os alunos registrados, com índices para seleção
+                // Exibe a lista de alunos
                 for (int i = 0; i < listaDeAlunos.size(); i++) {
                     System.out.println((i + 1) + " - " + listaDeAlunos.get(i).getNome());
                 }
 
                 System.out.print("Escolha um número: ");
                 opcao = sc.nextInt();
-                sc.nextLine(); // Limpa o buffer do scanner
+                sc.nextLine(); // Limpar o buffer do scanner
 
-                // Verifica se o índice selecionado é válido e acessa o aluno correspondente
                 Aluno alunoSelecionado = listaDeAlunos.get(opcao - 1);
 
-                // Verifica se o aluno selecionado possui disciplinas cadastradas
+                // Verifica se o aluno possui disciplinas
                 if (alunoSelecionado.getListaDisciplinas().isEmpty()) {
                     System.out.println("Este aluno não está inscrito em nenhuma disciplina.");
                 } else {
-                    // Exibe as notas de cada disciplina do aluno
+                    // Exibe as disciplinas e as notas do aluno
                     System.out.println("Notas de " + alunoSelecionado.getNome() + ":");
                     for (Alunodisciplina ad : alunoSelecionado.getListaDisciplinas()) {
                         System.out.println("Disciplina: " + ad.getDisciplina().getNome());
@@ -85,43 +82,60 @@ public class Aluno extends Pessoa {
                 sc.next(); // Limpa o buffer do Scanner
             }
 
-            // Solicita que o usuário pressione Enter para continuar, se não tiver escolhido sair
             if (opcao != 0) {
                 System.out.println("\nPressione Enter para continuar...");
                 sc.nextLine(); // Limpa a nova linha pendente
-                sc.nextLine(); // Aguarda o usuário pressionar Enter
+                sc.nextLine(); // Espera o usuário pressionar Enter
             }
-        } while (opcao != 0); // Repete até que o usuário escolha sair
+        } while (opcao != 0);
     }
 
-    // Cadastra um novo aluno na lista
     public static void cadastrarNovoAluno() {
         System.out.println("-CADASTRAR ALUNO-");
 
-        // Solicita informações do novo aluno
         System.out.print("Nome: ");
         String nome = sc.nextLine();
-        Aluno aluno = new Aluno();
-        aluno.setNome(nome);
 
         System.out.print("CPF: ");
         String cpf = sc.nextLine();
-        aluno.setCpf(cpf);
 
-        // Adiciona o aluno à lista de alunos
+        System.out.print("Matrícula: ");
+        String matricula = sc.nextLine(); // Adiciona a matrícula aqui
+
+        // Seleção da modalidade de ensino
+        ModalidadeEnsino modalidade = null;
+        while (modalidade == null) {
+            System.out.println("Escolha a modalidade de ensino:");
+            for (ModalidadeEnsino m : ModalidadeEnsino.values()) {
+                System.out.println(m.ordinal() + 1 + " - " + m.getModelo());
+            }
+
+            int escolha = sc.nextInt();
+            sc.nextLine(); // Limpar o buffer do scanner
+            if (escolha >= 1 && escolha <= ModalidadeEnsino.values().length) {
+                modalidade = ModalidadeEnsino.values()[escolha - 1];
+            } else {
+                System.out.println("Escolha inválida. Tente novamente.");
+            }
+        }
+
+        Aluno aluno = new Aluno();
+        aluno.setNome(nome);
+        aluno.setCpf(cpf);
+        aluno.setMatricula(matricula); // Define a matrícula
+        aluno.setModalidade(modalidade); // Define a modalidade
+
         listaDeAlunos.add(aluno);
 
         System.out.println("Aluno cadastrado com sucesso!\n");
     }
 
-    // Remove um aluno da lista com base na seleção do usuário
     public static void deletarAluno() {
         System.out.println("-DELETAR ALUNO-");
 
         if (listaDeAlunos.isEmpty()) {
             System.out.println("Nenhum aluno registrado.");
         } else {
-            // Exibe a lista de alunos para o usuário selecionar
             System.out.println("\nAlunos:");
             for (int i = 0; i < listaDeAlunos.size(); i++) {
                 System.out.println((i + 1) + " - " + listaDeAlunos.get(i).getNome());
@@ -130,7 +144,6 @@ public class Aluno extends Pessoa {
             int numeroDeletar = sc.nextInt();
             sc.nextLine(); // Limpar o buffer do scanner
 
-            // Remove o aluno da lista com base no número selecionado
             if (numeroDeletar > 0 && numeroDeletar <= listaDeAlunos.size()) {
                 listaDeAlunos.remove(numeroDeletar - 1);
                 System.out.println("Aluno deletado com sucesso.");
@@ -140,13 +153,11 @@ public class Aluno extends Pessoa {
         }
     }
 
-    // Atualiza as informações de um aluno específico
     public static void atualizarAluno() {
         System.out.print("Digite o CPF do aluno que deseja atualizar: ");
         String cpfDigitado = sc.nextLine();
 
         Aluno alunoParaAtualizar = null;
-        // Encontra o aluno com o CPF informado
         for (Aluno aluno : listaDeAlunos) {
             if (aluno.getCpf().equals(cpfDigitado)) {
                 alunoParaAtualizar = aluno;
@@ -154,30 +165,28 @@ public class Aluno extends Pessoa {
             }
         }
 
-        // Se o aluno for encontrado, exibe um menu para atualizar suas informações
         if (alunoParaAtualizar != null) {
             int option;
             do {
-                // Mostra as informações atuais do aluno
-                System.out.printf("""
+                System.out.printf(""" 
                         ° Nome: %s
                         ° CPF: %s
                         ° Matrícula: %s
-                        """, alunoParaAtualizar.getNome(), alunoParaAtualizar.getCpf(), alunoParaAtualizar.getMatricula());
+                        ° Modalidade: %s
+                        """, alunoParaAtualizar.getNome(), alunoParaAtualizar.getCpf(), alunoParaAtualizar.getMatricula(), alunoParaAtualizar.getModalidade().getModelo());
 
-                // Exibe opções para atualizar as informações do aluno
-                System.out.println("""
+                System.out.println(""" 
                         O que deseja atualizar?
                         Digite 1 para ALTERAR o NOME
                         Digite 2 para ALTERAR a MATRICULA
                         Digite 3 para ALTERAR o CPF
+                        Digite 4 para ALTERAR a MODALIDADE
                         Digite 0 para SAIR
                         """);
 
                 option = sc.nextInt();
                 sc.nextLine(); // Limpar o buffer do scanner
 
-                // Atualiza a informação escolhida pelo usuário
                 switch (option) {
                     case 1:
                         System.out.print("Digite o novo nome: ");
@@ -191,38 +200,52 @@ public class Aluno extends Pessoa {
                         System.out.print("Digite o novo CPF: ");
                         alunoParaAtualizar.setCpf(sc.nextLine());
                         break;
+                    case 4:
+                        // Atualizar a modalidade
+                        ModalidadeEnsino modalidade = null;
+                        while (modalidade == null) {
+                            System.out.println("Escolha a nova modalidade de ensino:");
+                            for (ModalidadeEnsino m : ModalidadeEnsino.values()) {
+                                System.out.println(m.ordinal() + 1 + " - " + m.getModelo());
+                            }
+
+                            int escolha = sc.nextInt();
+                            sc.nextLine(); // Limpar o buffer do scanner
+                            if (escolha >= 1 && escolha <= ModalidadeEnsino.values().length) {
+                                modalidade = ModalidadeEnsino.values()[escolha - 1];
+                            } else {
+                                System.out.println("Escolha inválida. Tente novamente.");
+                            }
+                        }
+                        alunoParaAtualizar.setModalidade(modalidade);
+                        break;
                     case 0:
-                        System.out.println("...Voltando ao Menu anterior...");
+                        System.out.println("...Voltando ao menu...");
                         break;
                     default:
-                        System.out.println("Opção inválida. Tente novamente.");
+                        System.out.println("Opção inválida.");
                         break;
                 }
-            } while (option != 0); // Continua até o usuário escolher sair
+            } while (option != 0);
         } else {
             System.out.println("Aluno não encontrado.");
         }
     }
 
-    // Imprime a lista de todos os alunos cadastrados
     public static void imprimeListaDeAlunos() {
+        System.out.println("LISTA DE ALUNOS:");
+
         if (listaDeAlunos.isEmpty()) {
             System.out.println("Nenhum aluno registrado.");
         } else {
-            // Exibe nome e CPF de cada aluno
-            System.out.println("\nAlunos:");
             for (Aluno aluno : listaDeAlunos) {
-                System.out.println("Nome: " + aluno.getNome());
-                System.out.println("CPF: " + aluno.getCpf());
-                System.out.println();
+                System.out.printf("""
+                        Nome: %s
+                        CPF: %s
+                        Matrícula: %s
+                        Modalidade: %s
+                        """, aluno.getNome(), aluno.getCpf(), aluno.getMatricula(), aluno.getModalidade().getModelo());
             }
         }
-    }
-
-    // Retorna a data e hora atual formatada
-    public String dataMatricula() {
-        LocalDateTime today = LocalDateTime.now(); // Obtém a data e hora atual
-        DateTimeFormatter customFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"); // Define o formato desejado
-        return today.format(customFormatter); // Formata e retorna a data e hora
     }
 }

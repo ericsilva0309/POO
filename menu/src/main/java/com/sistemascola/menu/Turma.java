@@ -9,20 +9,29 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Turma {
-
     private int id;
     private String numero;
     private List<Aluno> alunos;
     private List<Professor> professores;
 
-    public Turma(){
+    public Turma() {
+        this.alunos = new ArrayList<>(); // Inicializa a lista de alunos
+        this.professores = new ArrayList<>(); // Inicializa a lista de professores
     }
 
     public Turma(int id, String numero) {
         this.id = id;
         this.numero = numero;
         this.alunos = new ArrayList<>(); // Inicializa a lista de alunos
-        this.professores = new ArrayList<>();
+        this.professores = new ArrayList<>(); // Inicializa a lista de professores
+    }
+
+    // Novo construtor com apenas um parâmetro `id`
+    public Turma(int id) {
+        this.id = id;
+        this.numero = "Não definido"; // Define um valor padrão para `numero`
+        this.alunos = new ArrayList<>(); // Inicializa a lista de alunos
+        this.professores = new ArrayList<>(); // Inicializa a lista de professores
     }
 
     public void adicionarAluno(Aluno aluno) {
@@ -30,7 +39,7 @@ public class Turma {
     }
 
     public void adicionarProfessor(Professor professor) {
-        this.professores.add(professor); // Adiciona um aluno à lista
+        this.professores.add(professor); // Adiciona um professor à lista
     }
 
     public void exibirDadosTurma() {
@@ -45,12 +54,13 @@ public class Turma {
                 System.out.println("- " + aluno.getNome()); // Isso vai chamar o método toString() de Aluno
             }
         }
+
         if (professores.isEmpty()) {
             System.out.println("Nenhum professor registrado na turma.");
         } else {
             System.out.println("\nProfessores:");
             for (Professor professor : professores) {
-                System.out.println("- " + professor.getNome()); // Isso vai chamar o método toString() de professor
+                System.out.println("- " + professor.getNome()); // Isso vai chamar o método toString() de Professor
             }
         }
     }

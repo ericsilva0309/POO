@@ -41,19 +41,20 @@ public class MenuEscola {
 
             } catch (DigitoInvalidoException e) {
                 System.out.println(e.getMessage()); // Mostra a mensagem de erro personalizada
-            } catch (Exception e) {
+            } catch (InputMismatchException e) {
                 System.out.println("Erro: Entrada inválida. Por favor, insira um número.");
-                sc.nextLine(); // Evita loop infinito
+                sc.next(); // Limpa o buffer do scanner para a próxima tentativa
+            } catch (Exception e) {
+                System.out.println("Erro inesperado: " + e.getMessage()); // Mensagem de erro genérica para depuração
             }
 
             if (opcao != 0) {
                 System.out.println("\nPressione Enter para continuar...");
-                sc.nextLine(); // Limpa a nova linha pendente
-                sc.nextLine(); // Espera o usuário pressionar Enter
+                sc.nextLine();
             }
         } while (opcao != 0);
 
-        sc.close(); // Fechar o scanner quando não for mais necessário
+        sc.close();
     }
 
     public static void menuDiretor() {
@@ -74,16 +75,16 @@ public class MenuEscola {
                 sc.nextLine(); // Limpar o buffer do scanner
                 switch (opcao) {
                     case 1:
-                        Aluno.cadastrarNovoAluno(); // Chama o método da classe Aluno
+                        Aluno.cadastrarNovoAluno();
                         break;
                     case 2:
-                        Aluno.atualizarAluno(); // Chama o método da classe Aluno
+                        Aluno.atualizarAluno();
                         break;
                     case 3:
-                        Aluno.deletarAluno(); // Chama o método da classe Aluno
+                        Aluno.deletarAluno();
                         break;
                     case 4:
-                        Aluno.imprimeListaDeAlunos(); // Chama o método da classe Aluno
+                        Aluno.imprimeListaDeAlunos();
                         break;
                     case 0:
                         System.out.println("Saindo... Até logo!");
@@ -96,7 +97,6 @@ public class MenuEscola {
                 System.out.println("Entrada inválida. Digite um número.");
                 sc.next(); // Limpa o buffer do Scanner
             }
-
         } while (opcao != 0);
     }
 }
