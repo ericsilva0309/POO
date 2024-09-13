@@ -14,32 +14,27 @@ public class Turma {
     private List<Aluno> alunos;
     private List<Professor> professores;
 
+    public static List<Turma> listaDeTurmas = new ArrayList<>();
+
     public Turma() {
-        this.alunos = new ArrayList<>(); // Inicializa a lista de alunos
-        this.professores = new ArrayList<>(); // Inicializa a lista de professores
     }
 
     public Turma(int id, String numero) {
         this.id = id;
         this.numero = numero;
-        this.alunos = new ArrayList<>(); // Inicializa a lista de alunos
-        this.professores = new ArrayList<>(); // Inicializa a lista de professores
+        this.alunos = new ArrayList<>();
+        this.professores = new ArrayList<>();
     }
 
-    // Novo construtor com apenas um parâmetro `id`
-    public Turma(int id) {
-        this.id = id;
-        this.numero = "Não definido"; // Define um valor padrão para `numero`
-        this.alunos = new ArrayList<>(); // Inicializa a lista de alunos
-        this.professores = new ArrayList<>(); // Inicializa a lista de professores
-    }
+    
+    
 
     public void adicionarAluno(Aluno aluno) {
-        this.alunos.add(aluno); // Adiciona um aluno à lista
+        this.alunos.add(aluno);
     }
 
     public void adicionarProfessor(Professor professor) {
-        this.professores.add(professor); // Adiciona um professor à lista
+        this.professores.add(professor);
     }
 
     public void exibirDadosTurma() {
@@ -51,16 +46,15 @@ public class Turma {
         } else {
             System.out.println("\nAlunos:");
             for (Aluno aluno : alunos) {
-                System.out.println("- " + aluno.getNome()); // Isso vai chamar o método toString() de Aluno
+                System.out.println("- " + aluno.getNome());
             }
         }
-
         if (professores.isEmpty()) {
             System.out.println("Nenhum professor registrado na turma.");
         } else {
             System.out.println("\nProfessores:");
             for (Professor professor : professores) {
-                System.out.println("- " + professor.getNome()); // Isso vai chamar o método toString() de Professor
+                System.out.println("- " + professor.getNome());
             }
         }
     }

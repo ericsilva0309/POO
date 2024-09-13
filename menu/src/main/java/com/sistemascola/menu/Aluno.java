@@ -91,44 +91,80 @@ public class Aluno extends Pessoa {
     }
 
     public static void cadastrarNovoAluno() {
-        System.out.println("-CADASTRAR ALUNO-");
-
+        System.out.println("- CADASTRAR ALUNO -");
+    
         System.out.print("Nome: ");
         String nome = sc.nextLine();
-
+    
         System.out.print("CPF: ");
         String cpf = sc.nextLine();
-
+    
         System.out.print("Matrícula: ");
-        String matricula = sc.nextLine(); // Adiciona a matrícula aqui
-
+        String matricula = sc.nextLine();
+    
         // Seleção da modalidade de ensino
         ModalidadeEnsino modalidade = null;
         while (modalidade == null) {
             System.out.println("Escolha a modalidade de ensino:");
-            for (ModalidadeEnsino m : ModalidadeEnsino.values()) {
-                System.out.println(m.ordinal() + 1 + " - " + m.getModelo());
+            for (int i = 0; i < ModalidadeEnsino.values().length; i++) {
+                System.out.println((i + 1) + " - " + ModalidadeEnsino.values()[i].getModelo());
             }
-
-            int escolha = sc.nextInt();
-            sc.nextLine(); // Limpar o buffer do scanner
+    
+            int escolha = -1;
+            try {
+                escolha = sc.nextInt();
+                sc.nextLine(); // Limpar o buffer do scanner
+            } catch (InputMismatchException e) {
+                System.out.println("Entrada inválida. Digite um número.");
+                sc.next(); // Limpa o buffer do Scanner
+            }
+            
             if (escolha >= 1 && escolha <= ModalidadeEnsino.values().length) {
                 modalidade = ModalidadeEnsino.values()[escolha - 1];
             } else {
                 System.out.println("Escolha inválida. Tente novamente.");
             }
         }
-
+    
+        // Seleção da turma
+        Turma turmaSelecionada = null;
+        while (turmaSelecionada == null) {
+            System.out.println("Escolha a turma para o aluno:");
+            for (int i = 0; i < Turma.listaDeTurmas.size(); i++) {
+                System.out.println((i + 1) + " - " + Turma.listaDeTurmas.get(i).getNumero());
+            }
+    
+            int escolhaTurma = -1;
+            try {
+                escolhaTurma = sc.nextInt();
+                sc.nextLine(); // Limpar o buffer do scanner
+            } catch (InputMismatchException e) {
+                System.out.println("Entrada inválida. Digite um número.");
+                sc.next(); // Limpa o buffer do Scanner
+            }
+    
+            if (escolhaTurma >= 1 && escolhaTurma <= Turma.listaDeTurmas.size()) {
+                turmaSelecionada = Turma.listaDeTurmas.get(escolhaTurma - 1);
+            } else {
+                System.out.println("Escolha de turma inválida. Tente novamente.");
+            }
+        }
+    
+        // Criação do aluno
         Aluno aluno = new Aluno();
         aluno.setNome(nome);
         aluno.setCpf(cpf);
-        aluno.setMatricula(matricula); // Define a matrícula
-        aluno.setModalidade(modalidade); // Define a modalidade
-
+        aluno.setMatricula(matricula);
+        aluno.setModalidade(modalidade);
+        aluno.setTurma(turmaSelecionada);
+        aluno.setMatriculadoEm(LocalDateTime.now());
+    
         listaDeAlunos.add(aluno);
-
+        turmaSelecionada.adicionarAluno(aluno);
+    
         System.out.println("Aluno cadastrado com sucesso!\n");
     }
+    
 
     public static void deletarAluno() {
         System.out.println("-DELETAR ALUNO-");
@@ -242,9 +278,10 @@ public class Aluno extends Pessoa {
                 System.out.printf("""
                         Nome: %s
                         CPF: %s
+                        Turma: %s
                         Matrícula: %s
                         Modalidade: %s
-                        """, aluno.getNome(), aluno.getCpf(), aluno.getMatricula(), aluno.getModalidade().getModelo());
+                        """, aluno.getNome(), aluno.getCpf(), aluno.getTurma().getNumero(), aluno.getMatricula(), aluno.getModalidade().getModelo());
             }
         }
     }

@@ -72,7 +72,7 @@ public class MenuEscola {
 
             try {
                 opcao = sc.nextInt();
-                sc.nextLine(); // Limpar o buffer do scanner
+                sc.nextLine();
                 switch (opcao) {
                     case 1:
                         Aluno.cadastrarNovoAluno();

@@ -14,6 +14,10 @@ public class MenuApplication {
         
         Aluno pedro = new Aluno();
         pedro.setNome("Pedro");
+        Turma turma1 = new Turma(1, "202");
+        Turma turma2 = new Turma(2, "203");
+        Turma.listaDeTurmas.add(turma1);
+        Turma.listaDeTurmas.add(turma2);
 
         MenuEscola.diretor();
 
